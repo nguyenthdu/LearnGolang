@@ -1,0 +1,13 @@
+{
+    "go.languageServerFlags": [
+        
+        
+    ],
+    "gopls": {
+        "ui.semanticTokens": true
+    },
+    "go.alternateTools": {
+
+    }
+
+}
