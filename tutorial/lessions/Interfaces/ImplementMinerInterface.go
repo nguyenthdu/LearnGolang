@@ -1,7 +1,7 @@
 package main
 
 import (
-	"LearnGolang/basic/lessions/Interfaces/min"
+	"LearnGolang/tutorial/lessions/Interfaces/min"
 	"fmt"
 )
 

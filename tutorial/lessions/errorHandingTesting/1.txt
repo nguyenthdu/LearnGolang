@@ -1,0 +1,19 @@
+Đoạn mã này định nghĩa một hàm `protect` có một tham số kiểu hàm (`g` là một biến kiểu hàm). Mục đích của hàm `protect` là bảo vệ việc thực thi của hàm `g()` để đảm bảo rằng các panic (lỗi runtime) không làm cho chương trình dừng hoạt động mà vẫn tiếp tục thực thi các phần khác của mã.
+
+Dưới đây là cách hàm `protect` hoạt động:
+
+1. Hàm `protect` nhận một tham số là một hàm không có đối số và không có giá trị trả về (`func()`). Đây là hàm mà bạn muốn bảo vệ khỏi panic.
+
+2. Trong hàm `protect`, có một khối `defer` được sử dụng để thiết lập một hàm hành động. Hàm này sẽ được thực thi sau khi hàm bên ngoài (`protect`) kết thúc.
+
+3. Trong hàm hành động của `defer`, hai việc được thực hiện:
+
+   a. `log.Println("done")` được gọi để in ra "done". Điều này sẽ luôn được thực hiện ngay cả khi có panic xảy ra, vì defer được thực thi ngay sau khi hàm bên ngoài (`protect`) kết thúc.
+
+   b. `recover()` được gọi để chứa việc xử lý các panic. `recover` trả về giá trị nil nếu không có panic, và trả về giá trị của panic nếu có panic. Nếu có panic xảy ra, `log.Printf("run time panic: %v", err)` sẽ được gọi để in ra thông báo về lỗi runtime đã xảy ra.
+
+4. Tiếp theo, `log.Println("start")` được gọi để in ra "start".
+
+5. Cuối cùng, hàm `g()` được gọi để thực hiện hàm mà bạn truyền vào tham số `protect`. Điều này có thể gây ra panic nếu hàm `g()` có lỗi runtime.
+
+Với cấu trúc trên, dù có panic xảy ra trong hàm `g()` hay không, chương trình vẫn tiếp tục thực thi và đảm bảo in ra thông báo "done" sau khi hàm `g()` thực thi xong. Nếu có panic, nó sẽ được ghi nhận và in ra thông báo lỗi cụ thể.

@@ -1,0 +1,24 @@
+Mã này mô phỏng việc sử dụng `panic` và `recover` trong Go để xử lý lỗi runtime (panic) mà không dừng hoạt động của chương trình. Hãy cùng tìm hiểu từng phần của mã:
+
+1. `func badCall()`:
+   Đây là một hàm được định nghĩa để gây ra panic. Trong trường hợp này, hàm `badCall` gọi hàm `panic("bad end")`, khiến chương trình kích hoạt một panic với thông báo "bad end".
+
+2. `func test()`:
+   Hàm `test` chứa một khối `defer` để xử lý các panic. Trong khối này, hàm `recover` được gọi. Nếu có panic xảy ra trong phạm vi của khối `defer`, `recover` sẽ trả về giá trị của panic đó. Trong trường hợp không có panic, `recover` trả về giá trị `nil`.
+
+   Khi có panic, `fmt.Printf("Panicking %s\r\n", e)` sẽ in ra thông báo "Panicking" kèm theo thông báo panic (`e`) mà bạn đã định nghĩa trong hàm `badCall`.
+
+   Tiếp theo, hàm `badCall()` được gọi, gây ra panic. Tuy nhiên, vì đã có khối `defer` với `recover`, chương trình sẽ không bị dừng, và khối `recover` sẽ được thực thi.
+
+3. `func main()`:
+   Trong hàm `main()`, đầu tiên in ra "Calling test". Sau đó, hàm `test()` được gọi. Trong quá trình thực hiện hàm `test()`, sẽ có panic xảy ra từ hàm `badCall()`. Nhưng vì có khối `recover` trong hàm `test()`, panic này sẽ được bắt lại và thông báo sẽ được in ra: "Panicking bad end". Cuối cùng, in ra "Test completed".
+
+Kết quả chạy mã sẽ là:
+
+```
+Calling test
+Panicking bad end
+Test completed
+```
+
+Mã này minh họa cách sử dụng `panic` và `recover` để bắt lỗi runtime mà không làm cho chương trình kết thúc đột ngột.

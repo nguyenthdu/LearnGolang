@@ -1,7 +1,7 @@
 package main
 
 import (
-	"LearnGolang/basic/lessions/Exported/pers"
+	"LearnGolang/tutorial/lessions/Exported/pers"
 	"fmt"
 )
 
