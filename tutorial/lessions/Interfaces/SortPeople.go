@@ -1,7 +1,7 @@
 package main
 
 import (
-	"LearnGolang/basic/lessions/Interfaces/mysort2"
+	"LearnGolang/tutorial/lessions/Interfaces/mysort2"
 	"fmt"
 )
 
