@@ -15,4 +15,14 @@ const (
 
 func main() {
 	fmt.Println(MALE)
+	switch n := loop_input(10); {
+	case n < 10:
+		fmt.Println("n<10")
+	case n > 10:
+		fmt.Println("n>10")
+	}
+}
+func loop_input(n int) int {
+	return n - 5
+
 }

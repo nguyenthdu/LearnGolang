@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 const (
 	WIDTH  = 1920 // columns of 2D array
 	HEIGHT = 1080 // rows of 2D array
@@ -14,4 +16,6 @@ func main() {
 			screen[x][y] = 0 // initializing value to 2D array
 		}
 	}
+	//print screen
+	fmt.Print(screen)
 }
